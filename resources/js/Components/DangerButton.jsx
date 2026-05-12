@@ -4,6 +4,7 @@ export default function DangerButton({
     children,
     ...props
 }) {
+    //hadi la fonction dyal delete dyal page des rendez-vous 
     return (
         <button
             {...props}

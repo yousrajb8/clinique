@@ -11,10 +11,10 @@ export default function Index({ rendezvous }) {
             router.delete(`/rendezvous/${id}`);
         }
     };
-
+// dik confirm hiya li katkhelik tbdl statut bach t2eked 
     const handleStatusChange = (id, newStatus) => {
         if (confirm(t('confirm_status_change'))) {
-            router.patch(`/rendezvous/${id}/status`, { statut: newStatus });
+         router.patch(`/rendezvous/${id}/status`, { statut: newStatus });
         }
     };
 

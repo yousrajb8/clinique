@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Notifications\ResetPasswordNotification;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -48,18 +50,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+
     public function animals()
-{
-    return $this->hasMany(Animal::class);
-}
+    {
+        return $this->hasMany(Animal::class);
+    }
 
-public function rendezvous()
-{
-    return $this->hasMany(Rendezvous::class);
-}
+    public function rendezvous()
+    {
+        return $this->hasMany(Rendezvous::class);
+    }
 
-public function isAdmin()
-{
-    return $this->role === 'admin';
-}
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }

@@ -1,7 +1,9 @@
 import React from 'react';
 
 export default function Footer() {
+    
     return (
+        
         <footer className="bg-gray-800 text-white py-8 text-center mt-auto">
             <div className="flex justify-center items-center gap-2 mb-2">
                 <span className="text-2xl">🐾</span>

@@ -67,4 +67,12 @@ return [
     'saving' => 'Saving...',
     'save' => 'Save',
     'cancel' => 'Cancel',
+    'confirmed_label' => '✅ Confirmed',
+    'canceled_label' => '❌ Cancelled',
+    'pending_label' => '⏳ Pending',
+    'confirm_status_change' => 'Do you want to change the status of this appointment?',
+    'client' => 'Client',
+    'count_appointments' => 'appointment(s)',
+    'years' => 'years',
+    'count_animals' => 'animal(s)',
 ];

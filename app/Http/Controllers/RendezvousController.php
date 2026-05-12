@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\RendezvousConfirme;
+use App\Mail\RendezvousCreated;
+use App\Mail\RendezvousStatusUpdated;
 use App\Models\Animal;
 use App\Models\Rendezvous;
 use App\Models\Service;
@@ -126,7 +127,7 @@ class RendezvousController extends Controller
         $rendezvous->load(['user', 'animal', 'service', 'veterinaire']);
 
         Mail::to(auth()->user()->email)
-            ->send(new RendezvousConfirme($rendezvous));
+            ->send(new RendezvousCreated($rendezvous));
 
         return redirect()->route('rendezvous.index');
     }
@@ -169,6 +170,11 @@ public function edit(Rendezvous $rendezvous)
     public function destroy(Rendezvous $rendezvous)
     {
         $rendezvous->update(['statut' => 'annule']);
+        
+        $rendezvous->load(['user', 'animal', 'service', 'veterinaire']);
+        Mail::to($rendezvous->user->email)
+            ->send(new RendezvousStatusUpdated($rendezvous));
+
         return redirect()->route('rendezvous.index');
     }
 
@@ -181,11 +187,11 @@ public function updateStatus(Request $request, Rendezvous $rendezvous)
 
     $rendezvous->update(['statut' => $request->statut]);
 
-    // Envoyer un email si le rdv est confirmé
-    if ($request->statut === 'confirme') {
+    // Envoyer un email si le rdv est confirmé ou annulé
+    if ($request->statut === 'confirme' || $request->statut === 'annule') {
         $rendezvous->load(['user', 'animal', 'service', 'veterinaire']);
         Mail::to($rendezvous->user->email)
-            ->send(new RendezvousConfirme($rendezvous));
+            ->send(new RendezvousStatusUpdated($rendezvous));
     }
 
     return redirect()->back()->with('success', 'Statut du rendez-vous mis à jour');
