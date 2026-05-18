@@ -1,7 +1,10 @@
 import InputError from '@/Components/InputError';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Login({ status, canResetPassword }) {
+    const { translations } = usePage().props;
+    const t = (key) => translations?.messages?.[key] || key;
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -17,7 +20,7 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <>
-            <Head title="Connexion" />
+            <Head title={t('login')} />
 
             <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center px-4">
 
@@ -29,7 +32,7 @@ export default function Login({ status, canResetPassword }) {
                         <h1 className="text-3xl font-extrabold text-blue-600 mt-2">
                             Vet<span className="text-green-500">Clinic</span>
                         </h1>
-                        <p className="text-gray-400 mt-1">Connexion à votre espace</p>
+                        <p className="text-gray-400 mt-1">{t('login_to_space')}</p>
                     </div>
 
                     {/* Card */}
@@ -46,7 +49,7 @@ export default function Login({ status, canResetPassword }) {
                             {/* Email */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                                    📧 Email
+                                    📧 {t('email')}
                                 </label>
                                 <input
                                     type="email"
@@ -62,7 +65,7 @@ export default function Login({ status, canResetPassword }) {
                             {/* Password */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                                    🔒 Mot de passe
+                                    🔒 {t('password')}
                                 </label>
                                 <input
                                     type="password"
@@ -83,14 +86,14 @@ export default function Login({ status, canResetPassword }) {
                                         onChange={(e) => setData('remember', e.target.checked)}
                                         className="rounded"
                                     />
-                                    Se souvenir de moi
+                                    {t('remember_me')}
                                 </label>
                                 {canResetPassword && (
                                     <Link
                                         href={route('password.request')}
                                         className="text-sm text-blue-500 hover:underline"
                                     >
-                                        Mot de passe oublié ?
+                                        {t('forgot_password_link')}
                                     </Link>
                                 )}
                             </div>
@@ -101,19 +104,19 @@ export default function Login({ status, canResetPassword }) {
                                 disabled={processing}
                                 className="w-full py-3 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-600 transition shadow-lg disabled:opacity-50"
                             >
-                                {processing ? 'Connexion...' : 'Se connecter'}
+                                {processing ? t('logging_in') : t('log_in')}
                             </button>
 
                         </form>
 
                         {/* Register */}
                         <p className="text-center text-gray-500 text-sm mt-6">
-                            Pas encore de compte ?{' '}
+                            {t('no_account_yet')}{' '}
                             <Link
                                 href="/register"
                                 className="text-blue-500 font-semibold hover:underline"
                             >
-                                S'inscrire
+                                {t('sign_up')}
                             </Link>
                         </p>
 

@@ -1,7 +1,10 @@
 import InputError from '@/Components/InputError';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Register() {
+    const { translations } = usePage().props;
+    const t = (key) => translations?.messages?.[key] || key;
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -19,7 +22,7 @@ export default function Register() {
 
     return (
         <>
-            <Head title="Inscription" />
+            <Head title={t('sign_up')} />
 
             <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center px-4">
 
@@ -31,25 +34,25 @@ export default function Register() {
                         <h1 className="text-3xl font-extrabold text-blue-600 mt-2">
                             Vet<span className="text-green-500">Clinic</span>
                         </h1>
-                        <p className="text-gray-400 mt-1">Créez votre compte</p>
+                        <p className="text-gray-400 mt-1">{t('create_account')}</p>
                     </div>
 
                     {/* Card */}
                     <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
 
-                        <form onSubmit={submit} className="space-y-5">
+                        <form onSubmit={submit} className="space-y-5" noValidate>
 
                             {/* Nom */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                                    👤 Nom complet
+                                    👤 {t('full_name')}
                                 </label>
                                 <input
                                     type="text"
                                     value={data.name}
                                     onChange={(e) => setData('name', e.target.value)}
                                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-                                    placeholder="Votre nom"
+                                    placeholder={t('name')}
                                     autoFocus
                                 />
                                 <InputError message={errors.name} className="mt-1" />
@@ -58,7 +61,7 @@ export default function Register() {
                             {/* Email */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                                    📧 Email
+                                    📧 {t('email')}
                                 </label>
                                 <input
                                     type="email"
@@ -74,7 +77,7 @@ export default function Register() {
                             {/* Telephone */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                                    📞 Téléphone
+                                    📞 {t('phone')}
                                 </label>
                                 <input
                                     type="text"
@@ -93,7 +96,7 @@ export default function Register() {
                             {/* Password */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                                    🔒 Mot de passe
+                                    🔒 {t('password')}
                                 </label>
                                 <input
                                     type="password"
@@ -109,7 +112,7 @@ export default function Register() {
                             {/* Confirm Password */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                                    🔒 Confirmer le mot de passe
+                                    🔒 {t('confirm_password')}
                                 </label>
                                 <input
                                     type="password"
@@ -129,19 +132,19 @@ export default function Register() {
                                 disabled={processing}
                                 className="w-full py-3 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-600 transition shadow-lg disabled:opacity-50"
                             >
-                                {processing ? 'Inscription...' : "S'inscrire"}
+                                {processing ? t('signing_up') : t('sign_up')}
                             </button>
 
                         </form>
 
                         {/* Login */}
                         <p className="text-center text-gray-500 text-sm mt-6">
-                            Déjà un compte ?{' '}
+                            {t('already_have_account')}{' '}
                             <Link
                                 href="/login"
                                 className="text-blue-500 font-semibold hover:underline"
                             >
-                                Se connecter
+                                {t('log_in')}
                             </Link>
                         </p>
 

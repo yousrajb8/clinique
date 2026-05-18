@@ -102,4 +102,16 @@ return [
     'count_animals' => 'animal(s)',
     'count_appointments' => 'rendez-vous',
     'client' => 'Client',
+    // Auth translations
+    'create_account' => 'Créez votre compte',
+    'login_to_space' => 'Connexion à votre espace',
+    'full_name' => 'Nom complet',
+    'remember_me' => 'Se souvenir de moi',
+    'forgot_password_link' => 'Mot de passe oublié ?',
+    'no_account_yet' => 'Pas encore de compte ?',
+    'already_have_account' => 'Déjà un compte ?',
+    'signing_up' => 'Inscription...',
+    'sign_up' => "S'inscrire",
+    'logging_in' => 'Connexion...',
+    'log_in' => 'Se connecter',
 ];
