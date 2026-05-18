@@ -24,7 +24,7 @@ class ServiceController extends Controller
         return Inertia::render('Services/Create');
     }
 
-    // bach n sauvegardi service jdid
+    //ajouter service jdid
     public function store(Request $request)
     {
         $request->validate([
@@ -40,14 +40,7 @@ class ServiceController extends Controller
         return redirect()->route('services.index');
     }
 
-    // kat affichi le service
-    public function show(Service $service)
-    {
-        return Inertia::render('Services/Show', [
-            'service' => $service
-        ]);
-    }
-
+    
     // formulaire de modification
     public function edit(Service $service)
     {
@@ -56,7 +49,7 @@ class ServiceController extends Controller
         ]);
     }
 
-    // 6. Modifier
+    //  Modifier
     public function update(Request $request, Service $service)
     {
         $request->validate([
@@ -72,7 +65,7 @@ class ServiceController extends Controller
         return redirect()->route('services.index');
     }
 
-    // 7. Supprimer
+    //  Supprimer
     public function destroy(Service $service)
     {
         $service->delete();

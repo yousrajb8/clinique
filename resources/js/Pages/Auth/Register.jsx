@@ -66,6 +66,7 @@ export default function Register() {
                                     onChange={(e) => setData('email', e.target.value)}
                                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                                     placeholder="votre@email.com"
+                                    required
                                 />
                                 <InputError message={errors.email} className="mt-1" />
                             </div>
@@ -83,8 +84,10 @@ export default function Register() {
                                     pattern="\d{10}"
                                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                                     placeholder="Ex: 0612345678"
+                                    required
                                 />
                                 <InputError message={errors.telephone} className="mt-1" />
+                            
                             </div>
 
                             {/* Password */}
@@ -98,6 +101,7 @@ export default function Register() {
                                     onChange={(e) => setData('password', e.target.value)}
                                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                                     placeholder="••••••••"
+                                    required
                                 />
                                 <InputError message={errors.password} className="mt-1" />
                             </div>
@@ -113,7 +117,9 @@ export default function Register() {
                                     onChange={(e) => setData('password_confirmation', e.target.value)}
                                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                                     placeholder="••••••••"
+                                    required
                                 />
+                                
                                 <InputError message={errors.password_confirmation} className="mt-1" />
                             </div>
 

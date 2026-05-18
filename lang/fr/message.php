@@ -13,6 +13,8 @@ return [
     'services_desc' => 'Gérer les services',
     'veterinarians' => 'Vétérinaires',
     'veterinarians_desc' => 'Gérer les médecins',
+    'schedules' => 'Horaires',
+    'schedules_desc' => 'Gérer le planning',
     'animals' => 'Animaux',
     'animals_desc' => 'Gérer les animaux',
     'profile' => 'Profil',

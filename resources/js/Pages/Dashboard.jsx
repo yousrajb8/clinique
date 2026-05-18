@@ -84,6 +84,12 @@ export default function Dashboard() {
                                     <p className="text-gray-500 text-sm mt-1">{t.animals_desc}</p>
                                 </Link>
 
+                                <Link href="/horaires" className="bg-orange-50 border border-orange-200 rounded-2xl p-6 hover:shadow-lg transition text-center">
+                                    <div className="text-4xl mb-3">⏰</div>
+                                    <h3 className="text-lg font-bold text-gray-800">{t.schedules}</h3>
+                                    <p className="text-gray-500 text-sm mt-1">{t.schedules_desc}</p>
+                                </Link>
+
                                 <Link href="/profile" className="bg-gray-50 border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition text-center">
                                     <div className="text-4xl mb-3">⚙️</div>
                                     <h3 className="text-lg font-bold text-gray-800">{t.profile}</h3>

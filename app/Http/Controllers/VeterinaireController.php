@@ -40,15 +40,9 @@ class VeterinaireController extends Controller
         return redirect()->route('veterinaires.index');
     }
 
-    // kat afficher veterinaire
-    public function show(Veterinaire $veterinaire)
-    {
-        return Inertia::render('Veterinaires/Show', [
-            'veterinaire' => $veterinaire
-        ]);
-    }
 
-    //  Formulaire de modification
+
+    // Modifier veterinaire
     public function edit(Veterinaire $veterinaire)
     {
         return Inertia::render('Veterinaires/Edit', [
@@ -56,7 +50,7 @@ class VeterinaireController extends Controller
         ]);
     }
 
-    //  Modifier
+    //  Modifier 
     public function update(Request $request, Veterinaire $veterinaire)
     {
         $request->validate([

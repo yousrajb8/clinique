@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 class AnimalController extends Controller
 {
-    // kat Afficher la liste des animaux de l'utilisateur connecté
+    // kat afficher lina les animaux dyal user li mconnecter 
   public function index()
 {
     if (auth()->user()->isAdmin()) {
@@ -29,7 +29,7 @@ class AnimalController extends Controller
         return Inertia::render('Animals/Create');
     }
 
-    // animal jdid kaymchi l base de données
+    // hna fin kanzido chi animal jdid 
     public function store(Request $request)
     {
         $request->validate([
@@ -48,7 +48,7 @@ class AnimalController extends Controller
         return redirect()->route('animals.index');
     }
 
-    // kat affichi les détails d'un animal
+    // kat affichi les details dyal animal wlk ma dayrach liha page ma kayench lach 
     public function show(Animal $animal)
     {
         return Inertia::render('Animals/Show', [
@@ -56,7 +56,7 @@ class AnimalController extends Controller
         ]);
     }
 
-    // Formulaire de modification
+    // Formulaire bach nmodifi
     public function edit(Animal $animal)
     {
         return Inertia::render('Animals/Edit', [
@@ -64,7 +64,7 @@ class AnimalController extends Controller
         ]);
     }
 
-    //  Mise à jour les informations de l'animal
+    //  modification dyal les info de l'animal
     public function update(Request $request, Animal $animal)
     {
         $request->validate([

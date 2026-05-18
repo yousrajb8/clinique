@@ -11,13 +11,13 @@ class Service extends Model
 
     protected $fillable = ['nom', 'prix'];
 
-    // koula service 3ando plusieurs vétérinaires
+    // koula service 3ando bzf dyal veterinaires 
     public function veterinaires()
     {
         return $this->hasMany(Veterinaire::class);
     }
 
-        // koula service 3ando plusieurs rendez-vous
+        // koula service 3ando bzf dyal les rdv 
     public function rendezvous()
     {
         return $this->hasMany(Rendezvous::class);

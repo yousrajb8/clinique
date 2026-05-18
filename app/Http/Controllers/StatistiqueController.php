@@ -53,7 +53,7 @@ class StatistiqueController extends Controller
                 ];
             });
 
-        // 4. Chiffres clés
+        // 4. total dyal koula haga 
         $stats = [
             'total_rdv'      => Rendezvous::count(),
             'total_users'    => User::where('role', 'user')->count(),
@@ -98,8 +98,6 @@ class StatistiqueController extends Controller
             $xmlData = simplexml_load_file($file->getPathname());
 
             foreach ($xmlData->rendezvous as $rdv) {
-                // Logique d'importation simple : on peut juste logger ou ré-insérer (attention aux IDs)
-                // Ici on va juste simuler ou insérer si besoin, mais souvent c'est pour vérification
                 \Log::info("Importation RDV : " . $rdv->date);
             }
 

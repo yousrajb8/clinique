@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Footer';
 
 export default function ResetPassword({ token, email }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -134,9 +133,6 @@ export default function ResetPassword({ token, email }) {
                     </div>
                 </div>
             </div>
-
-            {/* Footer */}
-            <Footer />
         </div>
     );
 }

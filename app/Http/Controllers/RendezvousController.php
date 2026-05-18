@@ -37,7 +37,7 @@ class RendezvousController extends Controller
         'rendezvous' => $rendezvous
     ]);
 }
-    // Formulaire d'ajout
+    // Formulairebach n ajouter
     public function create()
     {
         $animals      = Animal::where('user_id', auth()->id())->get();
@@ -55,7 +55,7 @@ class RendezvousController extends Controller
     public function disponibilites(Request $request, Veterinaire $veterinaire)
     {
         $date = $request->date;
-        // Log bach n3rfou chno kayji f $date w $veterinaire bhal chi carnet 
+      
             \Log::info('Date reçue: ' . $date);
             \Log::info('Vétérinaire ID: ' . $veterinaire->id);
             \Log::info('Vétérinaire nom: ' . $veterinaire->nom);
@@ -91,7 +91,7 @@ class RendezvousController extends Controller
         return response()->json($disponibles);
     }
 
-    // Sauvegarder
+    // Ajouter rdv
     public function store(Request $request)
     {
         $request->validate([
@@ -102,16 +102,16 @@ class RendezvousController extends Controller
             'veterinaire_id' => 'required|exists:veterinaires,id',
         ]);
 
-        // Vérifier que le vétérinaire fait bien ce service
+        // kay verifi wach dak vet dyal dak service
         $veterinaire = Veterinaire::find($request->veterinaire_id);
         if ($veterinaire->service_id != $request->service_id) {
             return back()->withErrors(['veterinaire_id' => 'Ce vétérinaire ne fait pas ce service']);
         }
 
-        // Vérifier que le créneau est disponible
+        // kay verifi wach dak creneau ba9i 
         $disponibles = $this->disponibilites($request, $veterinaire);
         if (!in_array($request->heure, $disponibles->getData())) {
-            return back()->withErrors(['heure' => 'Ce créneau n\'est plus disponible']);
+            return back()->withErrors(['heure' => 'Ce créneau n\'est plus disponible. Veuillez en choisir un autre.']);
         }
 
         $rendezvous = Rendezvous::create([
@@ -132,38 +132,7 @@ class RendezvousController extends Controller
         return redirect()->route('rendezvous.index');
     }
 
-    // Afficher un seul rendez-vous
-    public function show(Rendezvous $rendezvous)
-    {
-        $rendezvous->load(['animal', 'service', 'veterinaire']);
 
-        return Inertia::render('Rendezvous/Show', [
-            'rendezvous' => $rendezvous
-        ]);
-    }
-
-    // Formulaire de modification
-public function edit(Rendezvous $rendezvous)
-{
-    if (auth()->user()->isAdmin()) {
-        // admin kaychouf ga3 les animaux m3a les infos dyal user
-        $animals = Animal::with('user')->get();
-        $services = Service::all();
-        $veterinaires = Veterinaire::all();
-    } else {
-        // user kaychouf ghir animaux dyalo
-        $animals = Animal::where('user_id', auth()->id())->get();
-        $services = Service::all();
-        $veterinaires = Veterinaire::all();
-    }
-
-    return Inertia::render('Rendezvous/Edit', [
-        'rendezvous'   => $rendezvous->load(['service', 'veterinaire']),
-        'animals'      => $animals,
-        'services'     => $services,
-        'veterinaires' => $veterinaires,
-    ]);
-}
    
 
     // Annuler
@@ -178,7 +147,7 @@ public function edit(Rendezvous $rendezvous)
         return redirect()->route('rendezvous.index');
     }
 
-    // mise à jour du statut ghir admin y9der ybdel statut
+    // modifier statut ghir admin y9der ybdel statut
 public function updateStatus(Request $request, Rendezvous $rendezvous)
 {
     $request->validate([

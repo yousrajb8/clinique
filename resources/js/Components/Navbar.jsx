@@ -47,7 +47,7 @@ export default function Navbar() {
                     <>
                         <Link
                             href="/login"
-                            className="text-gray-500 font-medium hover:text-blue-600 transition"
+                            className=" text-gray-500 font-medium hover:text-blue-600 transition"
                         >
                             {t('login')}
                         </Link>

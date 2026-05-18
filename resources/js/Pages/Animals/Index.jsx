@@ -124,15 +124,6 @@ export default function Index({ animals }) {
                     </div>
                 )}
 
-                {/* Retour Dashboard */}
-                <div className="mt-10 max-w-3xl mx-auto">
-                    <Link
-                        href="/dashboard"
-                        className="text-gray-400 hover:text-gray-600 font-medium transition"
-                    >
-                        ← {t('back_dashboard')}
-                    </Link>
-                </div>
 
             </div>
         </>

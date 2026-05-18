@@ -29,7 +29,7 @@ export default function Home({ services = [] }) {
             {/* Navbar */}
             <Navbar />
 
-            {/* Hero */}
+            
             <section className="pt-32 pb-20 px-6 bg-gradient-to-br from-green-50 via-white to-blue-50">
                 <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
                     <div>
@@ -45,6 +45,7 @@ export default function Home({ services = [] }) {
                             {t('hero_subtitle')}
                         </p>
                         <div className="flex gap-4">
+                            
                             <Link
                                 href="/register"
                                 className="px-8 py-3 bg-blue-500 text-white rounded-full font-bold hover:bg-blue-600 transition shadow-lg"

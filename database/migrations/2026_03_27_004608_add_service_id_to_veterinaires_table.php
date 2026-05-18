@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('veterinaires', function (Blueprint $table) {
-            // Ajouter la colonne service_id
+        
             $table->foreignId('service_id')
                   ->nullable()
                   ->constrained('services')
@@ -27,7 +27,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('veterinaires', function (Blueprint $table) {
-            // Supprimer la colonne service_id
             $table->dropForeign(['service_id']);
             $table->dropColumn('service_id');
         });

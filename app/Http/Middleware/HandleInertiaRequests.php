@@ -33,7 +33,7 @@ class HandleInertiaRequests extends Middleware
     
     return array_merge(parent::share($request), [
         'translations' => fn () => [
-            'messages' => __('message'), // charge les traductions
+            'messages' => __('message'), // hadi kat charge traduction dyali
         ],
         'locale' => fn () => app()->getLocale(),
         'auth' => [

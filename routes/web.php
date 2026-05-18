@@ -2,6 +2,7 @@
 use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\HoraireController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VeterinaireController;
 use App\Http\Controllers\RendezvousController;
@@ -10,14 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
+
 Route::get('/test-lang', function () {
     return response()->json([
         'locale' => app()->getLocale(),
@@ -25,7 +19,7 @@ Route::get('/test-lang', function () {
         'welcome_message' => __('messages.welcome')
     ]);
 });
-
+// hadi fach admin kayzid chi service ka tzad f home
 Route::get('/', function () {
     $services = \App\Models\Service::all();
     return Inertia::render('Home', [
@@ -63,8 +57,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('veterinaires', VeterinaireController::class);
         Route::get('/statistiques', [StatistiqueController::class, 'index'])
             ->name('statistiques.index');
+        Route::resource('horaires', HoraireController::class)->only(['index', 'store', 'destroy']);
         
-        // XML Routes
+      
         Route::get('/export-xml', [StatistiqueController::class, 'exportXml'])->name('xml.export');
         Route::post('/import-xml', [StatistiqueController::class, 'importXml'])->name('xml.import');
     });

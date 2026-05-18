@@ -1,6 +1,5 @@
 import { Head, useForm, Link } from '@inertiajs/react';
 import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Footer';
 
 export default function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -99,8 +98,6 @@ export default function ForgotPassword({ status }) {
                     </div>
                 </div>
             </div>
-
-            <Footer />
         </div>
     );
 }

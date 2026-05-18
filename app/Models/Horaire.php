@@ -15,7 +15,7 @@ class Horaire extends Model
         'heure_debut',
         'heure_fin',
     ];
-
+//horaire 3ndo veterinaire wahed
     public function veterinaire()
     {
         return $this->belongsTo(Veterinaire::class);

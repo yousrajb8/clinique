@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('heure_fin');
             $table->timestamps();
             
-            // koula vétérinaire 3ando horaire wa7ed f koula nhar bhal matalan mn 8/6 
+            // koula tbib 3endo we9t wahed fnhar maymkench ycreer lih jouj dyal lundi fsimana 
             $table->unique(['veterinaire_id', 'jour']);
         });
     }

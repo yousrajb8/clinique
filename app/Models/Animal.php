@@ -9,14 +9,15 @@ class Animal extends Model
   use HasFactory;
 
     protected $fillable = ['nom', 'type', 'age', 'user_id'];
-
+//animal 3endo user wahed
     public function user()
     {
-        return $this->belongsTo(User::class);// الحيوان **ينتمي** لمستخدم واحد
+        
+        return $this->belongsTo(User::class);
     }
-
+//animal 3endo bzf dyl rdv
     public function rendezvous()
     {
-        return $this->hasMany(Rendezvous::class);//الحيوان **عنده** عدة مواعيد
+        return $this->hasMany(Rendezvous::class);
     }
 }

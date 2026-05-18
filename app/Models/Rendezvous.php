@@ -17,7 +17,7 @@ class Rendezvous extends Model
         'service_id',
         'veterinaire_id',
     ];
-
+//koula wahed 3endo haga wehda 
     public function user()
     {
         return $this->belongsTo(User::class);
