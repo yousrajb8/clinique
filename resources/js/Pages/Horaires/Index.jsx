@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Head, useForm, router } from '@inertiajs/react';
+import { Head, useForm, router, usePage } from '@inertiajs/react';
 import Navbar from '@/Components/Navbar';
 
 export default function Index({ auth, horaires, veterinaires }) {
+    const { translations } = usePage().props;
+    const t = (key) => translations?.messages?.[key] || key;
+
     const { data, setData, post, processing, errors, reset } = useForm({
         veterinaire_id: '',
         jour: 'lundi',
@@ -18,14 +21,14 @@ export default function Index({ auth, horaires, veterinaires }) {
     };
 
     const deleteHoraire = (id) => {
-        if (confirm('Voulez-vous vraiment supprimer cet horaire ?')) {
+        if (confirm(t('confirm_delete_schedule') || 'Voulez-vous vraiment supprimer cet horaire ?')) {
             router.delete(route('horaires.destroy', id));
         }
     };
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
-            <Head title="Gestion des Horaires" />
+            <Head title={t('schedules_management') || 'Gestion des Horaires'} />
             <Navbar />
 
             <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
@@ -36,19 +39,19 @@ export default function Index({ auth, horaires, veterinaires }) {
                         <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 sticky top-24">
                             <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                                 <span className="p-2 bg-blue-100 text-blue-600 rounded-xl">⏰</span>
-                                Ajouter un horaire
+                                {t('add_schedule') || 'Ajouter un horaire'}
                             </h2>
 
                             <form onSubmit={submit} className="space-y-5">
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-1">Vétérinaire</label>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t('veterinarian') || 'Vétérinaire'}</label>
                                     <select
                                         value={data.veterinaire_id}
                                         onChange={e => setData('veterinaire_id', e.target.value)}
                                         className="w-full rounded-xl border-gray-200 focus:ring-blue-500 focus:border-blue-500 transition"
                                         required
                                     >
-                                        <option value="">Sélectionner...</option>
+                                        <option value="">{t('choose_veterinarian') || 'Sélectionner...'}</option>
                                         {veterinaires.map(vet => (
                                             <option key={vet.id} value={vet.id}>{vet.nom}</option>
                                         ))}
@@ -57,25 +60,26 @@ export default function Index({ auth, horaires, veterinaires }) {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-1">Jour</label>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t('day') || 'Jour'}</label>
                                     <select
                                         value={data.jour}
                                         onChange={e => setData('jour', e.target.value)}
                                         className="w-full rounded-xl border-gray-200 focus:ring-blue-500 focus:border-blue-500 transition"
                                         required
                                     >
-                                        <option value="lundi">Lundi</option>
-                                        <option value="mardi">Mardi</option>
-                                        <option value="mercredi">Mercredi</option>
-                                        <option value="jeudi">Jeudi</option>
-                                        <option value="vendredi">Vendredi</option>
-                                        <option value="samedi">Samedi</option>
+                                        <option value="lundi">{t('lundi') || 'Lundi'}</option>
+                                        <option value="mardi">{t('mardi') || 'Mardi'}</option>
+                                        <option value="mercredi">{t('mercredi') || 'Mercredi'}</option>
+                                        <option value="jeudi">{t('jeudi') || 'Jeudi'}</option>
+                                        <option value="vendredi">{t('vendredi') || 'Vendredi'}</option>
+                                        <option value="samedi">{t('samedi') || 'Samedi'}</option>
+                                        <option value="dimanche">{t('dimanche') || 'Dimanche'}</option>
                                     </select>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block text-sm font-semibold text-gray-700 mb-1">Début</label>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1">{t('start_time') || 'Début'}</label>
                                         <input
                                             type="time"
                                             value={data.heure_debut}
@@ -85,7 +89,7 @@ export default function Index({ auth, horaires, veterinaires }) {
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-semibold text-gray-700 mb-1">Fin</label>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1">{t('end_time') || 'Fin'}</label>
                                         <input
                                             type="time"
                                             value={data.heure_fin}
@@ -101,7 +105,7 @@ export default function Index({ auth, horaires, veterinaires }) {
                                     disabled={processing}
                                     className="w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-100 disabled:opacity-50"
                                 >
-                                    {processing ? 'Enregistrement...' : 'Enregistrer'}
+                                    {processing ? (t('saving') || 'Enregistrement...') : (t('save') || 'Enregistrer')}
                                 </button>
                             </form>
                         </div>
@@ -113,10 +117,10 @@ export default function Index({ auth, horaires, veterinaires }) {
                             <table className="w-full text-left border-collapse">
                                 <thead className="bg-gray-50 text-gray-500 text-sm uppercase tracking-wider">
                                     <tr>
-                                        <th className="px-6 py-4 font-semibold">Vétérinaire</th>
-                                        <th className="px-6 py-4 font-semibold">Jour</th>
-                                        <th className="px-6 py-4 font-semibold">Horaires</th>
-                                        <th className="px-6 py-4 font-semibold text-right">Actions</th>
+                                        <th className="px-6 py-4 font-semibold">{t('veterinarian') || 'Vétérinaire'}</th>
+                                        <th className="px-6 py-4 font-semibold">{t('day') || 'Jour'}</th>
+                                        <th className="px-6 py-4 font-semibold">{t('schedules') || 'Horaires'}</th>
+                                        <th className="px-6 py-4 font-semibold text-right">{t('actions') || 'Actions'}</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
@@ -128,7 +132,7 @@ export default function Index({ auth, horaires, veterinaires }) {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold capitalize">
-                                                    {h.jour}
+                                                    {t(h.jour.toLowerCase()) || h.jour}
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4 text-gray-600 font-medium">
@@ -146,7 +150,7 @@ export default function Index({ auth, horaires, veterinaires }) {
                                     )) : (
                                         <tr>
                                             <td colSpan="4" className="px-6 py-10 text-center text-gray-400 italic">
-                                                Aucun horaire enregistré pour le moment.
+                                                {t('no_schedules') || 'Aucun horaire enregistré pour le moment.'}
                                             </td>
                                         </tr>
                                     )}

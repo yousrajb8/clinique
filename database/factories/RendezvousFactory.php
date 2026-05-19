@@ -19,14 +19,16 @@ class RendezvousFactory extends Factory
      */
     public function definition(): array
     {
+        $animal = Animal::inRandomOrder()->first();
+        
         return [
             'date'            => $this->faker->dateTimeBetween('now', '+1 month'),
             'heure'           => $this->faker->time('H:i'),
             'statut'          => $this->faker->randomElement(['en_attente', 'confirme', 'annule']),
-            'user_id'         => User::factory(),
-            'animal_id'       => Animal::factory(),
-            'service_id'      => Service::inRandomOrder()->first()->id,
-            'veterinaire_id'  => Veterinaire::inRandomOrder()->first()->id,
+            'user_id'         => $animal ? $animal->user_id : (User::inRandomOrder()->first()?->id ?? User::factory()),
+            'animal_id'       => $animal ? $animal->id : Animal::factory(),
+            'service_id'      => Service::inRandomOrder()->first()?->id,
+            'veterinaire_id'  => Veterinaire::inRandomOrder()->first()?->id,
         ];
     }
 }

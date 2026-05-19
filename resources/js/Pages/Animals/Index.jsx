@@ -87,7 +87,7 @@ export default function Index({ animals }) {
 
                                         {/* Badges */}
                                         <div className="flex gap-2">
-                                            <span className={`${color.badge} text-white text-xs font-bold px-3 py-1 rounded-full capitalize`}>
+                                            <span className={`bg-orange-400 text-white text-xs font-bold px-3 py-1 rounded-full capitalize`}>
                                                 {animal.type}
                                             </span>
                                             <span className="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">

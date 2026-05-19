@@ -1,7 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import Navbar from '@/Components/Navbar';
 
-export default function Dashboard() {
+export default function Dashboard({ services = [] }) {
     const { auth, translations, locale } = usePage().props;
     const isAdmin = auth.user.role === 'admin';
     const t = translations.messages; // fichiers lang/fr/messages.php et lang/en/messages.php
@@ -84,6 +84,12 @@ export default function Dashboard() {
                                     <p className="text-gray-500 text-sm mt-1">{t.animals_desc}</p>
                                 </Link>
 
+                                <Link href="/users" className="bg-teal-50 border border-teal-200 rounded-2xl p-6 hover:shadow-lg transition text-center">
+                                    <div className="text-4xl mb-3">👥</div>
+                                    <h3 className="text-lg font-bold text-gray-800">{t.users || 'Utilisateurs'}</h3>
+                                    <p className="text-gray-500 text-sm mt-1">{t.users_desc || 'Gérer les comptes utilisateurs'}</p>
+                                </Link>
+
                                 <Link href="/horaires" className="bg-orange-50 border border-orange-200 rounded-2xl p-6 hover:shadow-lg transition text-center">
                                     <div className="text-4xl mb-3">⏰</div>
                                     <h3 className="text-lg font-bold text-gray-800">{t.schedules}</h3>
@@ -118,6 +124,12 @@ export default function Dashboard() {
                                 <div className="text-4xl mb-3">🐾</div>
                                 <h3 className="text-lg font-bold text-gray-800">{t.my_animals}</h3>
                                 <p className="text-gray-500 text-sm mt-1">{t.my_animals_desc}</p>
+                            </Link>
+
+                            <Link href="/services" className="bg-pink-50 border border-pink-200 rounded-2xl p-6 hover:shadow-lg transition text-center">
+                                <div className="text-4xl mb-3">💊</div>
+                                <h3 className="text-lg font-bold text-gray-800">{t.services}</h3>
+                                <p className="text-gray-500 text-sm mt-1">{t.services_desc || 'Tarifs et soins de la clinique'}</p>
                             </Link>
 
                             <Link href="/profile" className="bg-gray-50 border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition text-center">

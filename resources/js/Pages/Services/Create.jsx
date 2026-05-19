@@ -82,7 +82,7 @@ export default function Create() {
                                     {processing ? t('saving') : `✅ ${t('save')}`}
                                 </button>
                                 <Link
-                                    href="/services"
+                                    href="/dashboard"
                                     className="flex-1 text-center py-3 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition"
                                 >
                                     ❌ {t('cancel')}

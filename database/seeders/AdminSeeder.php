@@ -16,6 +16,7 @@ class AdminSeeder extends Seeder
         User::create([
             'name'     => 'Admin',
             'email'    => 'admin@vetclinic.com',
+            'telephone' => '0612345678',
             'password' => Hash::make('password'),
             'role'     => 'admin',
         ]);

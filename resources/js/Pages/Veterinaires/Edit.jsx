@@ -1,10 +1,11 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Edit({ veterinaire }) {
+export default function Edit({ veterinaire, services = [] }) {
 
     const { data, setData, put, processing, errors } = useForm({
         nom: veterinaire.nom,
-        specialite: veterinaire.specialite,
+        service_id: veterinaire.service_id || '',
+        specialite: veterinaire.specialite || '',
     });
 
     const handleSubmit = (e) => {
@@ -48,23 +49,29 @@ export default function Edit({ veterinaire }) {
 
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                                    🔬 Spécialité
+                                    🔬 Spécialité (Service)
                                 </label>
                                 <select
-                                    value={data.specialite}
-                                    onChange={(e) => setData('specialite', e.target.value)}
+                                    value={data.service_id}
+                                    onChange={(e) => {
+                                        const sId = e.target.value;
+                                        const found = services.find(s => s.id == sId);
+                                        setData(prev => ({
+                                            ...prev,
+                                            service_id: sId,
+                                            specialite: found ? found.nom : ''
+                                        }));
+                                    }}
                                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                                 >
-                                    <option value="Chirurgie">🏥 Chirurgie</option>
-                                    <option value="Vaccination">💉 Vaccination</option>
-                                    <option value="Analyse">🔬 Analyse</option>
-                                    <option value="Dentisterie">🦷 Dentisterie</option>
-                                    <option value="Radiologie">📷 Radiologie</option>
-                                    <option value="Dermatologie">🧴 Dermatologie</option>
-                                    <option value="Ophtalmologie">👁️ Ophtalmologie</option>
-                                    <option value="Nutrition">🥗 Nutrition</option>
+                                    <option value="">-- Choisir un service --</option>
+                                    {services.map(service => (
+                                        <option key={service.id} value={service.id}>
+                                            💼 {service.nom}
+                                        </option>
+                                    ))}
                                 </select>
-                                {errors.specialite && <p className="text-red-500 text-sm mt-1">{errors.specialite}</p>}
+                                {errors.service_id && <p className="text-red-500 text-sm mt-1">{errors.service_id}</p>}
                             </div>
 
                             <div className="flex gap-4 pt-2">

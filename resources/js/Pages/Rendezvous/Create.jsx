@@ -146,6 +146,7 @@ export default function Create({ animals, services, veterinaires }) {
                                         </div>
                                     ) : (
                                         <div className="grid grid-cols-2 gap-2">
+                                            {/*hadi dyal smiyat dyal les veterinaire li bzre*/}
                                             {vetsDisponibles.map(vet => (
                                                 <button
                                                     key={vet.id}
@@ -240,7 +241,7 @@ export default function Create({ animals, services, veterinaires }) {
                                     {processing ? 'Enregistrement...' : '✅ Confirmer RDV'}
                                 </button>
                                 <Link
-                                    href="/rendezvous"
+                                    href="/dashboard"
                                     className="flex-1 text-center py-3 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition"
                                 >
                                     ❌ Annuler

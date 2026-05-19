@@ -27,7 +27,10 @@ Route::get('/', function () {
     ]);
 });
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $services = \App\Models\Service::all();
+    return Inertia::render('Dashboard', [
+        'services' => $services
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/lang/{locale}', function ($locale) {
@@ -58,7 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/statistiques', [StatistiqueController::class, 'index'])
             ->name('statistiques.index');
         Route::resource('horaires', HoraireController::class)->only(['index', 'store', 'destroy']);
-        
+        Route::resource('users', \App\Http\Controllers\UserController::class)->only(['index', 'destroy']);
       
         Route::get('/export-xml', [StatistiqueController::class, 'exportXml'])->name('xml.export');
         Route::post('/import-xml', [StatistiqueController::class, 'importXml'])->name('xml.import');

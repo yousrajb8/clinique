@@ -21,7 +21,10 @@ class VeterinaireController extends Controller
     // Formulaire d'ajout
     public function create()
     {
-        return Inertia::render('Veterinaires/Create');
+        $services = \App\Models\Service::all();
+        return Inertia::render('Veterinaires/Create', [
+            'services' => $services
+        ]);
     }
 
     // Sauvegarder
@@ -30,11 +33,13 @@ class VeterinaireController extends Controller
         $request->validate([
             'nom'        => 'required|string|max:255',
             'specialite' => 'required|string|max:255',
+            'service_id' => 'required|exists:services,id',
         ]);
 
         Veterinaire::create([
             'nom'        => $request->nom,
             'specialite' => $request->specialite,
+            'service_id' => $request->service_id,
         ]);
 
         return redirect()->route('veterinaires.index');
@@ -45,8 +50,10 @@ class VeterinaireController extends Controller
     // Modifier veterinaire
     public function edit(Veterinaire $veterinaire)
     {
+        $services = \App\Models\Service::all();
         return Inertia::render('Veterinaires/Edit', [
-            'veterinaire' => $veterinaire
+            'veterinaire' => $veterinaire,
+            'services' => $services
         ]);
     }
 
@@ -56,11 +63,13 @@ class VeterinaireController extends Controller
         $request->validate([
             'nom'        => 'required|string|max:255',
             'specialite' => 'required|string|max:255',
+            'service_id' => 'required|exists:services,id',
         ]);
 
         $veterinaire->update([
             'nom'        => $request->nom,
             'specialite' => $request->specialite,
+            'service_id' => $request->service_id,
         ]);
 
         return redirect()->route('veterinaires.index');
